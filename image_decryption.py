@@ -1,7 +1,7 @@
 from dna_operations import dna_decode, dna_encode, dna_xor
 import numpy as np
 
-def decrypt_image(cipher_img: np.ndarray , segments_list: list) -> np.ndarray:
+def decrypt_image(segments_list: list, cipher_img: np.ndarray) -> np.ndarray:
     processed_img = cipher_img.copy()
     height, width ,channels = cipher_img.shape
     index = 0
@@ -16,7 +16,7 @@ def decrypt_image(cipher_img: np.ndarray , segments_list: list) -> np.ndarray:
 
             key_dna = dna_encode(key_segment, rule)
             cipher_dna = dna_encode(cipher_binary, rule)
-            xored_dna = dna_xorR(key_dna, cipher_dna)
+            xored_dna = dna_xor(key_dna, cipher_dna)
             original_binary = dna_decode(xored_dna, rule)
 
             original_value = int(original_binary, 2)
